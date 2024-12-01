@@ -49,11 +49,13 @@ app.post("/template", async (req, res) => {
 app.post("/chat", async (req, res) => {
     const messages = req.body.messages;
     const systemPrompt = (0, prompt_1.getSystemPrompt)();
-    const mainPrompt = `system prompt: ${systemPrompt}, user prompt: ${messages}`;
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const userPrompt = messages.map((msg) => msg.content);
+    const mainPrompt = `system prompt: ${systemPrompt}, user prompt: ${userPrompt} generate the code based on the user prompt and system prompt`;
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const result = await model.generateContent(mainPrompt);
     const output = await result.response.text();
     console.log(output);
+    console.log(userPrompt);
     res.json({
         response: output
     });
