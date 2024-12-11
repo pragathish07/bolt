@@ -11,7 +11,7 @@ const port = 8000;
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 
-const genAI = new GoogleGenerativeAI();
+const genAI = new GoogleGenerativeAI('AIzaSyDEoOE4ydMhkIZgrXlCng8j51tm8XI4_dU');
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
